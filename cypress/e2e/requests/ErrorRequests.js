@@ -1,5 +1,5 @@
 import ResponseAssertions from "../responses/ResponseAssertions";
-
+import errorMessages from "../../fixtures/errorMessages.json"
 class ErrorRequests {
 
     BadRequest400(APIKey) {
@@ -7,6 +7,7 @@ class ErrorRequests {
         cy.request({ url: `https://api.openweathermap.org/data/2.5/weather?la=57&lon=-2.15&appid=${APIKey}`, failOnStatusCode: false })
             .then((response) => {
                 ResponseAssertions.verifyResponseStatusCode(response.status, 400);
+                ResponseAssertions.verifyBodyMessage(response, errorMessages[400]);
 
             })
     }
@@ -16,18 +17,24 @@ class ErrorRequests {
         cy.request({ url: `https://api.openweathermap.org/data/2.5/weather?lat=57&lon=-2.15&appid=${APIKey}`, failOnStatusCode: false })
             .then((response) => {
                 ResponseAssertions.verifyResponseStatusCode(response.status, 401);
+                ResponseAssertions.verifyBodyMessage(response, errorMessages[401]);
 
             })
     }
 
-    NotFoundRequest404(APIKey) {
+    NotFoundRequest404(cityName, APIKey) {
+        
 
-
-        cy.request({ url: `https://api.openweathermap.org/data/3.5/weather?lat=57&lon=-2.15&appid=${APIKey}`, failOnStatusCode: false })
+        cy.request({ url: `/weather?q=${cityName+"3"}&appid=${APIKey}`, failOnStatusCode: false })
             .then((response) => {
                 ResponseAssertions.verifyResponseStatusCode(response.status, 404);
+                ResponseAssertions.verifyBodyMessage(response, errorMessages[404])
 
             })
+
+        
+
+        
     }
 
     NotImplemented501() {

@@ -1,0 +1,6 @@
+{
+    "400": "Nothing to geocode",
+    "401": "Invalid API key. Please see https://openweathermap.org/faq#error401 for more info.",
+    "404": "city not found"
+
+}

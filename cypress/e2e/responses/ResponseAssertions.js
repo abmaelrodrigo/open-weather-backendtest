@@ -1,6 +1,10 @@
 
 class ResponseAssertion {
 
+    verifyBodyMessage(response, expectedMessage){
+        expect(response.body.message).to.eq(expectedMessage);
+    }
+
     verifyResponseStatusCode(response, expected) {
 
         expect(response).to.eq(expected);

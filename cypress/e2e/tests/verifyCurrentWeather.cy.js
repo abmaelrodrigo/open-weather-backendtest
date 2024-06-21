@@ -2,7 +2,7 @@
 
 import GetByLatAndLon from "../requests/GetByLatAndLon";
 import apiData from "../../fixtures/apiData.json";
-import GetByCityName from "../requests/GetByCityName";
+import GetByCity from "../requests/GetByCity";
 import GetByDifferentUnits from "../requests/GetByDifferentUnits";
 import ErrorRequests from "../requests/ErrorRequests";
 
@@ -16,10 +16,20 @@ context('Current weather data by latitude and longitude', () => {
 
 });
 
-context('Current weather data by city name', () => {
+context('Current weather data by city ', () => {
 
-    it('Verify user can access weather data by city name', () => {
-        GetByCityName.requestWeather(apiData.cityName, apiData.APIKey);
+    it('Verify user can get weather data by city name', () => {
+        GetByCity.requestWeatherByName(apiData.city.name, apiData.APIKey);
+
+    })
+
+    it('Verify user can get weather data by city ID', () => {
+        GetByCity.requestWeatherByID(apiData.city.id,apiData.city.country,apiData.APIKey);
+
+    })
+
+    it('Verify user can get weather data by city Zip Code', () => {
+        GetByCity.requestWeatherByZipCode(apiData.city.zip, apiData.city.country,apiData.APIKey);
 
     })
 
@@ -28,12 +38,12 @@ context('Current weather data by city name', () => {
 context('Current weather with different units of measurement', () => {
 
     it('Verify user can get the weather data on the Celsius unit', () => {
-        GetByDifferentUnits.requestWeatherByUnit(apiData.cityName, apiData.APIKey, "metric");
+        GetByDifferentUnits.requestWeatherByUnit(apiData.city.name, apiData.APIKey, "metric");
 
     })
 
     it('Verify user can get the weather data on the Fahrenheit unit', () => {
-        GetByDifferentUnits.requestWeatherByUnit(apiData.cityName, apiData.APIKey, "imperial");
+        GetByDifferentUnits.requestWeatherByUnit(apiData.city.name, apiData.APIKey, "imperial");
 
     })
 
@@ -41,7 +51,7 @@ context('Current weather with different units of measurement', () => {
 
 context('Error requests', () => {
 
-    it('Verify user obtain Bad Request 400 by sending incorrect parameter on the URL', () => {
+    it('Verify user obtain Bad Request 400 by sending incorrect Geocode parameter on the URL', () => {
         ErrorRequests.BadRequest400(apiData.APIKey);
 
     })
@@ -51,8 +61,8 @@ context('Error requests', () => {
 
     })
 
-    it('Verify user obtain Page Not Found Request 404 by modifying the API version on the URL', () => {
-        ErrorRequests.NotFoundRequest404(apiData.APIKey);
+    it('Verify user obtain  Not Found Request 404 by sending an invalid city name', () => {
+        ErrorRequests.NotFoundRequest404(apiData.city.name,apiData.APIKey);
 
     })
 
