@@ -67,3 +67,8 @@ npx cypress open
 ```bash
 npx cypress run
 ```
+## **Important**: 
+Remember to edit the API Key to the one you have obtained when registered on openweathermap.org. 
+Go to cypress/fixtures/apiData.json and enter your API key: 
+
+![Screenshot](img/api-key.png)
