@@ -1,9 +1,9 @@
 
 class ResponseAssertion {
 
-    verifyResponseStatusIs200(response) {
+    verifyResponseStatusCode(response, expected) {
 
-        expect(response.status).to.eq(200);
+        expect(response).to.eq(expected);
 
     }
 

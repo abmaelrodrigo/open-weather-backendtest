@@ -1,4 +1,5 @@
 import ResponseAssertions from "../responses/ResponseAssertions";
+let expectedResponse = 200;
 
 class GetByCityName{
 
@@ -10,7 +11,8 @@ class GetByCityName{
 
         cy.request(`/weather?q=${cityName}&appid=${APIKey}`)
             .then((response) => {
-                ResponseAssertions.verifyResponseStatusIs200(response);
+                
+                ResponseAssertions.verifyResponseStatusCode(response.status, expectedResponse);
                 
                 this.verifyCityName(cityName, response);
 

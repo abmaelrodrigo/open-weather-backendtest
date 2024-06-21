@@ -1,26 +1,68 @@
 /// <reference types="cypress" />
 
-import  GetByLatAndLon from "../routes/GetByLatAndLon";
+import GetByLatAndLon from "../requests/GetByLatAndLon";
 import apiData from "../../fixtures/apiData.json";
-import GetByCityName from "../routes/GetByCityName";
+import GetByCityName from "../requests/GetByCityName";
+import GetByDifferentUnits from "../requests/GetByDifferentUnits";
+import ErrorRequests from "../requests/ErrorRequests";
 
 
-context('Current weather data by latitude and longitude', ()=>{
-  
-    it('Verify user can access weather data by latitude and longitude', ()=> {
-       GetByLatAndLon.requestWeather(apiData.lat, apiData.lon, apiData.APIKey);
-    
+context('Current weather data by latitude and longitude', () => {
+
+    it('Verify user can access weather data by latitude and longitude', () => {
+        GetByLatAndLon.requestWeather(apiData.lat, apiData.lon, apiData.APIKey);
+
     })
+
+});
+
+context('Current weather data by city name', () => {
+
+    it('Verify user can access weather data by city name', () => {
+        GetByCityName.requestWeather(apiData.cityName, apiData.APIKey);
+
+    })
+
+});
+
+context('Current weather with different units of measurement', () => {
+
+    it('Verify user can get the weather data on the Celsius unit', () => {
+        GetByDifferentUnits.requestWeatherByUnit(apiData.cityName, apiData.APIKey, "metric");
+
+    })
+
+    it('Verify user can get the weather data on the Fahrenheit unit', () => {
+        GetByDifferentUnits.requestWeatherByUnit(apiData.cityName, apiData.APIKey, "imperial");
+
+    })
+
+});
+
+context('Error requests', () => {
+
+    it('Verify user obtain Bad Request 400 by sending incorrect parameter on the URL', () => {
+        ErrorRequests.BadRequest400(apiData.APIKey);
+
+    })
+
+    it('Verify user obtain Unauthorized Request 401 by sending incorrect API Key on the URL', () => {
+        ErrorRequests.UnauthorizedRequest401(100);
+
+    })
+
+    it('Verify user obtain Page Not Found Request 404 by modifying the API version on the URL', () => {
+        ErrorRequests.NotFoundRequest404(apiData.APIKey);
+
+    })
+
+    it('Verify user obtain Not Implemented 501 by mocking an API call status', () => {
+        ErrorRequests.NotImplemented501();
+
+    })
+
     
 });
 
-context('Current weather data by city name', ()=>{
-  
-    it.only('Verify user can access weather data by city name', ()=> {
-       GetByCityName.requestWeather(apiData.cityName, apiData.APIKey);
-    
-    })
-    
-})
 
 

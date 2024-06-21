@@ -1,5 +1,6 @@
-import apiResp from "../../fixtures/apiResponseStructure.json"
 import ResponseAssertions from "../responses/ResponseAssertions";
+let expectedResponse = 200;
+
 class GetByLatAndLon {
 
    
@@ -14,7 +15,7 @@ class GetByLatAndLon {
 
         cy.request(`/weather?lat=${lat}&lon=${lon}&appid=${APIKey}`)
             .then((response) => {
-                ResponseAssertions.verifyResponseStatusIs200(response);
+                ResponseAssertions.verifyResponseStatusCode(response.status, expectedResponse);
                 this.verifyCoordinates(lat, lon, response);
                 ResponseAssertions.verifyResponseStructure(response);
             })
