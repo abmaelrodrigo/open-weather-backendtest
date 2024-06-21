@@ -3,7 +3,7 @@
 👋 Hello!
 
 # Project description
-Explore the Open Weather API (https://openweathermap.org/current) by making requests to test the following functionalities:
+This project aims to explore the Open Weather API (https://openweathermap.org/current) by making requests to test the following functionalities:
 
 - Current weather data by latitude and longitude;
 - Current weather data by city name, city ID and zip code;
@@ -30,8 +30,8 @@ The following test cases were created to cover the main API funcionalities and e
 - Verify user obtain Not Implemented 501 by mocking an API call status.
 
 # How could we simulate / reproduce 429 Error?
-Errors 429 are the ones that represents many requests in a given amount of time - usually  short time. 
-As this error is related to rate limit set by a server, to reproduce we should first indentify the rate limit of the API or web service we are using. Next, we can use an application, e.g.  Jmeter, or create a code script, e.g. in JavaScript or Python, to simulate many requests that will be sent to exceed the allowed limit, paying close attention to reproduce it against a sandbox environment if available, since exceeding rate limits on production APIs can lead to some penalties, like temporary bans. 
+Errors 429 are the ones that represents many requests in a given amount of time - usually  a short time. 
+As this error is related to rate limit set by a server, to reproduce it we should first indentify the rate limit of the API or web service we are using. Next, we can use an application, e.g.  Jmeter, or create a code script, e.g. in JavaScript or Python, to simulate many requests that will be sent to exceed the allowed limit, paying close attention to reproduce it against a sandbox environment if available, since exceeding rate limits on production APIs can lead to some penalties, like temporary bans. 
 
 
 # How to install and check the project?
